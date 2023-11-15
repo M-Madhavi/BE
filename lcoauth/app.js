@@ -2,6 +2,7 @@ require('dotenv').config()
 require('./config/database').connect();
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
+const auth = require('./middleware/auth')
 // if path 
 // require('dotenv').config().path('../folderin which env file exist)
 const express = require('express')
@@ -21,7 +22,6 @@ app.post('/register', async (req, res) => {
         const existingUser = await User.findOne({ email })
         if (existingUser) {
             res.status(401).send("User already exists")
-
         }
         const myencryptpassword = await bcrypt.hash(password, 10)
         const user = await User.create({
@@ -47,10 +47,9 @@ app.post('/register', async (req, res) => {
     }
 })
 
-app.post('/login', async (req, res) => {
+app.post('/login', auth,async (req, res) => {
     try {
         const { email, password } = req.body
-
         if (!(email && password)) {
             res.status(400).send({ message: "please fill the required fields" })
             return;
@@ -72,10 +71,25 @@ app.post('/login', async (req, res) => {
             res.status(200).json(user)
         }
         res.send(400).send("email or password is incorrect")
-
     } catch (error) {
         console.log(error);
     }
+})
+//protecting route
+
+//use the middleware
+//check for token presence
+//verify into form payload
+//extract info from payload
+//next()
+
+//token can be
+//send to cookie,httpOnly
+//in headers
+//body
+
+app.get('/dashboard',auth,async(req,res) =>{
+    res.send("Welcome to dashboard")
 })
 
 module.exports = app
