@@ -1,0 +1,13 @@
+File structure
+  Break it wisely
+root
+     -config
+     -controllers
+     -middlware
+     -models
+     -routes
+     -seeds  -->connection to DB/dummydata
+     -utils -->sending email/otp
+     -.gitigonore
+     -.env
+     -app.js/index.js
