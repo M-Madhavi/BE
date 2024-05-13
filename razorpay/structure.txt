@@ -1,0 +1,13 @@
+Filestructure
+
+root 
+      --- config
+      --- controllers
+      --- middleware
+      --- models
+      --- routes
+      --- seeds(connection to DB and dummy data)
+      --- utils(sending email services,otp)
+      --- .gitignore
+      --- .env
+      --- app.js/index.js/server.js
