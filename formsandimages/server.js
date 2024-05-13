@@ -4,7 +4,7 @@ const app = express();
 const port = 4001 || process.env.port
 const cloudinary = require('cloudinary').v2
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));//{"name":{"fn":"abc","ln":"def"}}//to handle this internal nesting we use extended
 const fileUplaod = require('express-fileupload');
 app.use(fileUplaod({
     useTempFiles: true,
